@@ -3,9 +3,11 @@
   <hr />
 
   <div class="list-group list-reset">
-    <button class="list-group-item list-group-item-action mb-0">
-      Valorant
+    <button
+      *ngFor="let item of tagsHistory"
+      class="list-group-item list-group-item-action mb-0"
+    >
+      {{ item }}
     </button>
   </div>
 </div>
-  
