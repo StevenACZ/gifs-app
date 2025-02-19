@@ -15,7 +15,6 @@ export class GifsService {
 
   constructor(private http: HttpClient) {}
 
-  // Functions
   private organizeHistory(tag: string) {
     tag = tag.trim().toLowerCase();
 
@@ -47,7 +46,6 @@ export class GifsService {
     this.organizeHistory(tag);
   }
 
-  // GETTERS
   get tagsHistory(): string[] {
     return [...this._tagsHistory];
   }
