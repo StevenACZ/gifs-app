@@ -36,7 +36,7 @@ export class GifsService {
       .set('q', tag);
 
     this.http
-      .get<GiphyResponse>(`${SERVICE_URL}/trending`, { params })
+      .get<GiphyResponse>(`${SERVICE_URL}/search`, { params })
       .subscribe((res) => {
         this.gifList = res.data;
 

@@ -1,9 +1,10 @@
 <div class="card-list">
   <div *ngFor="let gif of gifs" class="card">
-    <img [src]="gif.embed_url" alt="Imagen tarjeta" />
+    <img [src]="gif.images.downsized_medium.url" [alt]="gif.title" />
+
     <div class="card-body">
-      <p>Body del tarjeta 1</p>
-      <button class="btn">Acción 1</button>
+      <p>{{ gif.title }}</p>
+      <!-- <button class="btn">Acción 1</button> -->
     </div>
   </div>
 </div>
