@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 
-// Interface
-import { Gif } from 'src/app/gifs/interfaces/gifs';
-
 // Services
 import { GifsService } from 'src/app/gifs/services/gifs.service';
 
@@ -12,13 +9,17 @@ import { GifsService } from 'src/app/gifs/services/gifs.service';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
+  public currentTag: string = '';
+
   constructor(private gifsService: GifsService) {}
 
   get tagsHistory(): string[] {
     return this.gifsService.tagsHistory;
   }
 
-  reSearchGifs(name: string): void {
-    this.gifsService.searchTag(name);
+  reSearchGifs(tag: string): void {
+    this.currentTag = tag;
+
+    this.gifsService.searchTag(tag, true);
   }
 }

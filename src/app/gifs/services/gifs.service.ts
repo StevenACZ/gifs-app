@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 // Interfaces
 import { Gif, GiphyResponse } from '../interfaces/gifs';
@@ -15,19 +16,17 @@ export class GifsService {
 
   constructor(private http: HttpClient) {}
 
-  private organizeHistory(tag: string) {
+  private organizeHistory(tag: string, reSearch: boolean = false) {
     tag = tag.trim().toLowerCase();
 
-    if (this._tagsHistory.includes(tag)) {
-      this._tagsHistory = this._tagsHistory.filter((olgTag) => olgTag !== tag);
+    if (reSearch !== true) {
+      this._tagsHistory.unshift(tag);
     }
-
-    this._tagsHistory.unshift(tag);
 
     this._tagsHistory = this._tagsHistory.slice(0, 10);
   }
 
-  searchTag(tag: string): void {
+  searchTag(tag: string, reSearch: boolean = false): void {
     if (tag.length === 0) return;
 
     const params = new HttpParams()
@@ -37,11 +36,13 @@ export class GifsService {
 
     this.http
       .get<GiphyResponse>(`${SERVICE_URL}/search`, { params })
-      .subscribe((res) => {
-        this.gifList = res.data;
-      });
-
-    this.organizeHistory(tag);
+      .pipe(
+        tap((res) => {
+          this.gifList = res.data;
+          this.organizeHistory(tag, reSearch);
+        })
+      )
+      .subscribe();
   }
 
   get tagsHistory(): string[] {

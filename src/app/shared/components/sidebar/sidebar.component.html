@@ -4,11 +4,15 @@
 
   <div class="list-group list-reset">
     <button
-      *ngFor="let item of tagsHistory"
-      class="list-group-item list-group-item-action mb-0"
-      (click)="reSearchGifs(item)"
+      *ngFor="let tag of tagsHistory; let i = index"
+      class="list-group-item list-group-tag-action mb-0"
+      [ngClass]="{
+        'bg-dark text-white': currentTag === tag,
+        'bg-light text-dark': currentTag !== tag
+      }"
+      (click)="reSearchGifs(tag)"
     >
-      {{ item | titlecase }}
+      {{ tag | titlecase }}
     </button>
   </div>
 </div>
