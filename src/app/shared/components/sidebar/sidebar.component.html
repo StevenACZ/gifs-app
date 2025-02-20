@@ -6,6 +6,7 @@
     <button
       *ngFor="let item of tagsHistory"
       class="list-group-item list-group-item-action mb-0"
+      (click)="reSearchGifs(item)"
     >
       {{ item | titlecase }}
     </button>

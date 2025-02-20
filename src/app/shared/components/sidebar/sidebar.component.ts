@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+// Interface
+import { Gif } from 'src/app/gifs/interfaces/gifs';
+
 // Services
 import { GifsService } from 'src/app/gifs/services/gifs.service';
 
@@ -13,5 +16,9 @@ export class SidebarComponent {
 
   get tagsHistory(): string[] {
     return this.gifsService.tagsHistory;
+  }
+
+  reSearchGifs(name: string): void {
+    this.gifsService.searchTag(name);
   }
 }

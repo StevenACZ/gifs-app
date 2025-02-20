@@ -39,8 +39,6 @@ export class GifsService {
       .get<GiphyResponse>(`${SERVICE_URL}/search`, { params })
       .subscribe((res) => {
         this.gifList = res.data;
-
-        console.log(this.gifList);
       });
 
     this.organizeHistory(tag);
